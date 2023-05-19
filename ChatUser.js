@@ -75,7 +75,18 @@ class ChatUser {
   handleMessage(jsonData) {
     let msg = JSON.parse(jsonData);
 
-    if (msg.type === "join") this.handleJoin(msg.name);
+    console.log("msg is>>>>", msg);
+    console.log("Msg.text is>>>>>", msg.text)
+    if(msg.text === "/joke"){
+      console.log("inside the if>>>>>")
+       this.send({
+        name: this.name,
+        type: "chat",
+        text: "What do you call eight hobbits? A hob-byte!",
+      })
+    }
+
+    else if (msg.type === "join") this.handleJoin(msg.name);
     else if (msg.type === "chat") this.handleChat(msg.text);
     else throw new Error(`bad message: ${msg.type}`);
   }
